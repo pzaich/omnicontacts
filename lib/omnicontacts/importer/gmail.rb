@@ -50,7 +50,8 @@ module OmniContacts
         return contacts if response.nil?
         response['feed']['entry'].each do |entry|
           # creating nil fields to keep the fields consistent across other networks
-          logger.debug "creating contact"
+
+          logger.puts "creating contact"
           contact = {:id => nil, :first_name => nil, :last_name => nil, :name => nil, :email => nil, :gender => nil, :birthday => nil, :profile_picture=> nil, :relation => nil}
           contact[:id] = entry['id']['$t'] if entry['id']
           if entry['gd$name']
@@ -72,7 +73,7 @@ module OmniContacts
             contact[:gender] = entry['gContact$gender']['value']  if entry['gContact$gender']
             contact[:image_source] = image_url(contact[:email])
           rescue
-            logger.debug "creating contact failed for #{contact.inspect}"
+            logger.puts "creating contact failed for #{contact.inspect}"
           end
           
 
