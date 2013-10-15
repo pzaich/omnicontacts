@@ -63,6 +63,7 @@ module OmniContacts
           end
 
           begin
+            logger.puts "building contact #{contact.inspect}"
             contact[:email] = entry['gd$email'][0]['address'] if entry['gd$email']
             contact[:first_name], contact[:last_name], contact[:name] = email_to_name(contact[:name]) if !contact[:name].nil? && contact[:name].include?('@')
             contact[:first_name], contact[:last_name], contact[:name] = email_to_name(contact[:email]) if contact[:name].nil? && contact[:email]
